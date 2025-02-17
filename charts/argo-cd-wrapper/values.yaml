@@ -10,3 +10,8 @@ argo-cd:
   server:
     extraArgs:
       - --insecure
+
+  # Fix "waiting for completion of hook batch/Job/argo-cd-wrapper-argocd-redis-secret-init"
+  redisSecretInit:
+    podLabels:
+      sidecar.istio.io/inject: "false"
