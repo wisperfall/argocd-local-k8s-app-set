@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+
+metadata:
+  name: argo-cd-wrapper
+  namespace: argo-cd
+
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+
+  labels:
+    name: argo-cd-wrapper
+
+spec:
+  project: argo-cd-project
+
+  sources:
+    - repoURL: https://github.com/wisperfall/argocd-local-k8s-app-set.git
+      targetRevision: HEAD
+      path: charts/argo-cd-wrapper/
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argo-cd
+
+  syncPolicy:
+    automated:
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+
+  revisionHistoryLimit: 5

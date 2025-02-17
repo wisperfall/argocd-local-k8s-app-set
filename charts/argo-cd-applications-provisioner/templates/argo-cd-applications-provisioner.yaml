@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+
+metadata:
+  name: argo-cd-applications-provisioner
+  namespace: argo-cd
+
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+
+  labels:
+    name: argo-cd-applications-provisioner
+
+spec:
+  project: argo-cd-project
+
+  sources:
+    - repoURL: https://github.com/wisperfall/argocd-local-k8s-app-set.git
+      targetRevision: HEAD
+      path: charts/argo-cd-applications-provisioner/
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argo-cd
+
+  syncPolicy:
+    automated:
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+
+  revisionHistoryLimit: 5

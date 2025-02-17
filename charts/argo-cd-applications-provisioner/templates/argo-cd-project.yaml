@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+
+metadata:
+  name: argo-cd-project
+  namespace: argo-cd
+
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+
+spec:
+  description: Argo CD components project.
+
+  sourceRepos:
+    - "*"
+
+  destinations:
+    - namespace: argo-cd
+      server: https://kubernetes.default.svc
+
+  clusterResourceWhitelist:
+    - group: "*"
+      kind: "*"
+
+  namespaceResourceWhitelist:
+    - group: "*"
+      kind: "*"
