@@ -1,0 +1,13 @@
+postgresql:
+  global:
+    postgresql:
+      auth:
+        postgresPassword: "postgres-pswd"
+
+        username: "myservice"
+        password: "myservice-pswd"
+        database: "my_custom_db"
+
+  primary:
+    persistence:
+      enabled: false
