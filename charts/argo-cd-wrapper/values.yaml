@@ -4,6 +4,7 @@ argo-cd:
 
   configs:
     secret:
+      argocdServerAdminPasswordMtime: "2025-02-17T15:04:05Z"
       argocdServerAdminPassword: "$2a$10$/jMcziaWt0f3p5FsFdDn9uVTk3W7ZBoU9R8vSmYDjvn9ygt5Dj8s6"
 
   server:
