@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+
+metadata:
+  name: bitnami-postgresql-wrapper
+  namespace: argo-cd
+
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+
+  labels:
+    name: bitnami-postgresql-wrapper
+
+spec:
+  project: database-project
+
+  sources:
+    - repoURL: https://github.com/wisperfall/argocd-local-k8s-app-set.git
+      targetRevision: HEAD
+      path: charts/bitnami-postgresql-wrapper/
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: bitnami-postgresql
+
+  syncPolicy:
+    automated:
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+
+  revisionHistoryLimit: 5
