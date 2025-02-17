@@ -26,3 +26,9 @@ Helm charts repository for automated Argo CD applications provisioning in the lo
 ### Install Applications provisioner manifests:
 
 - `helm template ./charts/argo-cd-applications-provisioner/ | kubectl apply -f -`
+
+## Bitnami PostgreSQL
+
+### Install PostgreSQL
+
+- `helm dep update ./charts/bitnami-postgresql-wrapper/`
